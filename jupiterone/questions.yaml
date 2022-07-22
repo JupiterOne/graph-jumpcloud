@@ -1,0 +1,13 @@
+---
+sourceId: managed:jumpcloud
+integrationDefinitionId: "${integration_definition_id}"
+questions: 
+- id: managed-question-JumpCloud-user-no-mfa-configured
+  title: Which JumpCloud users do not have MFA configured and are not on the exclusion list?
+  description: Returns all JumpCloud users without MFA configured.
+  queries:
+    - query: |
+        FIND jumpcloud_user WITH mfaConfigured != true OR mfaEnabled != true OR mfaExclusion != true
+  tags:
+  - jumpcloud
+  - mfa
