@@ -3,6 +3,7 @@ import {
   JumpCloudGroup,
   JumpCloudOrg,
   JumpCloudUser,
+  JumpCloudDevice,
 } from '../src/jumpcloud/types';
 
 export function createMockUser(): JumpCloudUser {
@@ -98,5 +99,38 @@ export function createMockApplication(): JumpCloudApplication {
       type: 'saml',
       idpCertExpirationAt: '2026-10-29T17:58:59.000Z',
     },
+  };
+}
+
+export function createMockDevice(): JumpCloudDevice {
+  return {
+    createdAt: '2021-10-29T17:59:00.448Z',
+    depRegistered: true,
+    deviceInformation: {
+      activationLockAllowedWhileSupervised: true,
+      availableDeviceCapacity: 3,
+      deviceCapacity: 2,
+      deviceName: 'mockDevice',
+      iccid: 'mockiccid',
+      imei: 'mockimei',
+      isActivationLockEnabled: true,
+      isSupervised: true,
+      modelName: 'mockmodelname',
+      subscriberCarrierNetwork: 'mockcarriernetworkname',
+      wifiMac: 'aa:bb:cc:dd:ee:ff',
+    },
+    enrolled: true,
+    hasActivationLockBypassCodes: true,
+    id: 'mockid123',
+    osVersion: 'mockmackosversion12',
+    securityInfo: {
+      enrolledViaDep: true,
+      isActivationLockManageable: true,
+      isUserEnrollment: true,
+      passcodePresent: true,
+      userApprovedEnrollment: true,
+    },
+    serialNumber: '123456abc',
+    udid: 'mockudid',
   };
 }

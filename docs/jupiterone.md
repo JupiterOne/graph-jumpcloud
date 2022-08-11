@@ -82,6 +82,7 @@ The following entities are created:
 | Resources     | Entity `_type`          | Entity `_class`           |
 | ------------- | ----------------------- | ------------------------- |
 | Application   | `jumpcloud_application` | `Application`             |
+| Device        | `jumpcloud_device`      | `Device`                  |
 | Group         | `jumpcloud_group`       | `Group`                   |
 | Organizations | `jumpcloud_account`     | `Account`, `Organization` |
 | User          | `jumpcloud_user`        | `User`                    |
@@ -95,9 +96,11 @@ The following relationships are created:
 | `jumpcloud_account`   | **HAS**               | `jumpcloud_application` |
 | `jumpcloud_account`   | **HAS**               | `jumpcloud_group`       |
 | `jumpcloud_account`   | **HAS**               | `jumpcloud_user`        |
+| `jumpcloud_device`    | **INSTALLED**         | `jumpcloud_application` |
 | `jumpcloud_group`     | **ASSIGNED**          | `jumpcloud_application` |
 | `jumpcloud_group`     | **HAS**               | `jumpcloud_user`        |
 | `jumpcloud_user`      | **ASSIGNED**          | `jumpcloud_application` |
+| `jumpcloud_user`      | **HAS**               | `jumpcloud_device`      |
 
 <!--
 ********************************************************************************

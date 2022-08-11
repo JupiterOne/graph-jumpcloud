@@ -7,6 +7,9 @@ import {
   JumpCloudGroupMember,
   JumpCloudOrg,
   JumpCloudUser,
+  JumpCloudDevice,
+  JumpCloudDeviceMDM,
+  JumpCloudSystemInsightsApp,
 } from './types';
 import {
   IntegrationError,
@@ -27,6 +30,17 @@ interface ApiResponse {
   totalCount?: number;
 }
 
+interface ListDevicesMDMResponse extends ApiResponse {
+  results?: JumpCloudDeviceMDM[];
+}
+
+interface ListDevicesResponse extends ApiResponse {
+  results?: JumpCloudDevice[];
+}
+
+interface ListSystemInsightsAppsResponse extends ApiResponse {
+  results?: JumpCloudSystemInsightsApp[];
+}
 interface ListAppsResponse extends ApiResponse {
   results?: JumpCloudApplication[];
 }
@@ -62,6 +76,124 @@ export class JumpCloudClient {
   public async listOrgs(params?: QueryParams): Promise<ListOrgsResponse> {
     return this.makeRequest<ListOrgsResponse>(
       `${this.BASE_API_URL}/organizations`,
+      { totalCount: 0, results: [] },
+      params,
+    );
+  }
+
+  async iterateDevices(callback: (device: JumpCloudDevice) => Promise<void>) {
+    let numResultsLastPage = 0;
+
+    const limit = 100;
+    let totalIterated = 0;
+    const deviceMDM = await this.getDeviceMDM();
+
+    if (deviceMDM?.totalCount && deviceMDM.totalCount > 0 && deviceMDM[0].id) {
+      //Currently only one is allowed per org and all we need is ID
+      const MDMID = deviceMDM[0].id;
+
+      do {
+        const response = await this.listDevices(MDMID, {
+          limit: limit.toString(),
+          skip: totalIterated.toString(),
+        });
+
+        for (const device of response.results || []) {
+          await callback(device);
+        }
+
+        numResultsLastPage = response.results ? response.results.length : 0;
+        totalIterated += numResultsLastPage;
+      } while (numResultsLastPage > 0);
+    }
+  }
+
+  public async listDevices(
+    MDMID: string,
+    params?: QueryParams,
+  ): Promise<ListDevicesResponse> {
+    return this.makeRequest<ListDevicesResponse>(
+      `${this.BASE_API_URL}/applemdms/${MDMID}/devices`,
+      { totalCount: 0, results: [] },
+      params,
+    );
+  }
+
+  public async getDeviceMDM(
+    params?: QueryParams,
+  ): Promise<ListDevicesMDMResponse> {
+    return this.makeRequest<ListDevicesMDMResponse>(
+      `${this.BASE_API_URL}/applemdms`,
+      { totalCount: 0, results: [] },
+      params,
+    );
+  }
+
+  async iterateAppsByDevice(
+    deviceId: string,
+    callback: (app: JumpCloudSystemInsightsApp) => Promise<void>,
+  ) {
+    let numResultsLastPage = 0;
+
+    const limit = 100;
+    let totalIterated = 0;
+
+    do {
+      const response = await this.listSystemInsightsApps({
+        limit: limit.toString(),
+        skip: totalIterated.toString(),
+        filter: `system_id:eq:${deviceId}`,
+      });
+
+      for (const app of response.results || []) {
+        await callback(app);
+      }
+
+      numResultsLastPage = response.results ? response.results.length : 0;
+      totalIterated += numResultsLastPage;
+    } while (numResultsLastPage > 0);
+  }
+
+  public async listSystemInsightsApps(
+    params?: QueryParams,
+  ): Promise<ListSystemInsightsAppsResponse> {
+    return this.makeRequest<ListSystemInsightsAppsResponse>(
+      `${this.BASE_API_URL}/systeminsights/apps`,
+      { totalCount: 0, results: [] },
+      params,
+    );
+  }
+
+  async iterateUsersByDevice(
+    deviceId: string,
+    callback: (user: JumpCloudUser) => Promise<void>,
+  ) {
+    let numResultsLastPage = 0;
+
+    const limit = 100;
+    let totalIterated = 0;
+
+    do {
+      const response = await this.listUsersBoundToDevice(deviceId, {
+        limit: limit.toString(),
+        skip: totalIterated.toString(),
+      });
+
+      for (const user of response.results || []) {
+        await callback(user);
+      }
+
+      numResultsLastPage = response.results ? response.results.length : 0;
+      totalIterated += numResultsLastPage;
+    } while (numResultsLastPage > 0);
+  }
+
+  public async listUsersBoundToDevice(
+    deviceId: string,
+    params?: QueryParams,
+  ): Promise<ListUsersResponse> {
+    return this.makeRequest<ListUsersResponse>(
+      `${this.BASE_API_URL}/systems/${deviceId}/users`,
       { totalCount: 0, results: [] },
       params,
     );

@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#createDeviceEntity should convert data 1`] = `
+Object {
+  "_class": Array [
+    "Device",
+  ],
+  "_key": "mockid123",
+  "_rawData": Array [
+    Object {
+      "name": "default",
+      "rawData": Object {
+        "createdAt": "2021-10-29T17:59:00.448Z",
+        "depRegistered": true,
+        "deviceInformation": Object {
+          "activationLockAllowedWhileSupervised": true,
+          "availableDeviceCapacity": 3,
+          "deviceCapacity": 2,
+          "deviceName": "mockDevice",
+          "iccid": "mockiccid",
+          "imei": "mockimei",
+          "isActivationLockEnabled": true,
+          "isSupervised": true,
+          "modelName": "mockmodelname",
+          "subscriberCarrierNetwork": "mockcarriernetworkname",
+          "wifiMac": "aa:bb:cc:dd:ee:ff",
+        },
+        "enrolled": true,
+        "hasActivationLockBypassCodes": true,
+        "id": "mockid123",
+        "osVersion": "mockmackosversion12",
+        "securityInfo": Object {
+          "enrolledViaDep": true,
+          "isActivationLockManageable": true,
+          "isUserEnrollment": true,
+          "passcodePresent": true,
+          "userApprovedEnrollment": true,
+        },
+        "serialNumber": "123456abc",
+        "udid": "mockudid",
+      },
+    },
+  ],
+  "_type": "jumpcloud_device",
+  "createdOn": 1635530340448,
+  "displayName": "mockDevice",
+  "id": "mockid123",
+  "name": "mockDevice",
+  "osVersion": "mockmackosversion12",
+}
+`;
