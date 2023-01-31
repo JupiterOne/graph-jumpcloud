@@ -8,6 +8,12 @@ and this project adheres to
 
 ## [Unreleased]
 
+## 2.1.1 - 2023-01-26
+
+### Fixed
+
+- Skip `Group HAS Member` relationship creation if it was already created.
+
 ## 2.1.0 - 2021-11-10
 
 ### Added

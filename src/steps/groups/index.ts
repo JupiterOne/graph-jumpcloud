@@ -77,13 +77,23 @@ export async function fetchGroupMembers({
           return;
         }
 
-        await jobState.addRelationship(
-          createDirectRelationship({
-            _class: RelationshipClass.HAS,
-            from: groupEntity,
-            to: userEntity,
-          }),
+        const groupMemberRelationship = createDirectRelationship({
+          _class: RelationshipClass.HAS,
+          from: groupEntity,
+          to: userEntity,
+        });
+
+        const relationshipExists = await jobState.hasKey(
+          groupMemberRelationship._key,
         );
+        if (!relationshipExists) {
+          await jobState.addRelationship(groupMemberRelationship);
+        } else {
+          logger.info(
+            { relationship: groupMemberRelationship },
+            'Skipping relationship creation. Relationship already exists.',
+          );
+        }
       });
     },
   );
