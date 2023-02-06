@@ -8,6 +8,12 @@ and this project adheres to
 
 ## [Unreleased]
 
+## 2.1.2 - 2023-02-06
+
+### Fixed
+
+- Release job to include `package.json`
+
 ## 2.1.1 - 2023-01-26
 
 ### Fixed
