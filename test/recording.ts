@@ -4,7 +4,6 @@ import {
   mutations,
   Recording,
 } from '@jupiterone/integration-sdk-testing';
-import { IntegrationConfig } from '../src/config';
 
 export { Recording } from '@jupiterone/integration-sdk-testing';
 export function setupJumpCloudRecording(input: SetupRecordingInput): Recording {
