@@ -5,7 +5,6 @@ import {
   parseTimePropertyValue,
 } from '@jupiterone/integration-sdk-core';
 export function createAppleMDMEntity(data: JumpCloudAppleMDM) {
-  data.depServerTokenState;
   return createIntegrationEntity({
     entityData: {
       source: data,
