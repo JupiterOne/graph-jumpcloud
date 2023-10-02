@@ -7,14 +7,15 @@ import { appSteps } from './steps/applications';
 import { validateInvocation } from './validator';
 import { appleSteps } from './steps/applemdm';
 
-export const invocationConfig: IntegrationInvocationConfig<IntegrationConfig> = {
-  instanceConfigFields,
-  validateInvocation,
-  integrationSteps: [
-    ...orgSteps,
-    ...userSteps,
-    ...groupSteps,
-    ...appSteps,
-    ...appleSteps,
-  ],
-};
+export const invocationConfig: IntegrationInvocationConfig<IntegrationConfig> =
+  {
+    instanceConfigFields,
+    validateInvocation,
+    integrationSteps: [
+      ...orgSteps,
+      ...userSteps,
+      ...groupSteps,
+      ...appSteps,
+      ...appleSteps,
+    ],
+  };

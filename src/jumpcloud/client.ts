@@ -368,7 +368,7 @@ export class JumpCloudClient {
         if (response.status === 200) {
           const json = await response.json();
           this.logger.trace({ url }, 'Fetch completed');
-          return (json as unknown) as T;
+          return json as unknown as T;
         } else if (response.status === 404) {
           this.logger.info(
             { url },
