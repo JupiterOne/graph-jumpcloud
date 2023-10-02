@@ -2,6 +2,8 @@ import fetch, { Response } from 'node-fetch';
 import { URL } from 'url';
 import { AttemptContext, retry } from '@lifeomic/attempt';
 import {
+  JumpCloudAppleDevice,
+  JumpCloudAppleMDM,
   JumpCloudApplication,
   JumpCloudGroup,
   JumpCloudGroupMember,
@@ -239,6 +241,48 @@ export class JumpCloudClient {
       numResultsLastPage = members.length;
     } while (numResultsLastPage > 0);
   }
+  async iterateAppleMDM(callback: (mdm: JumpCloudAppleMDM) => Promise<void>) {
+    let numResultsLastPage = 0;
+
+    const limit = 100;
+    let totalMdmIterated = 0;
+
+    do {
+      const response = await this.listAppleMDM({
+        limit: limit.toString(),
+        skip: totalMdmIterated.toString(),
+      });
+
+      for (const mdm of response || []) {
+        await callback(mdm);
+      }
+
+      numResultsLastPage = response.length ? response.length : 0;
+      totalMdmIterated += numResultsLastPage;
+    } while (numResultsLastPage > 0);
+  }
+
+  async iterateAppleDevices(
+    mdmId: string,
+    callback: (device: JumpCloudAppleDevice) => Promise<void>,
+  ) {
+    let numResultsLastPage = 0;
+
+    const limit = 100;
+    let totalDevicesIterated = 0;
+    do {
+      const response = await this.listAppleDevice(mdmId, {
+        limit: limit.toString(),
+        skip: totalDevicesIterated.toString(),
+      });
+      for (const device of response || []) {
+        await callback(device);
+      }
+
+      numResultsLastPage = response.length ? response.length : 0;
+      totalDevicesIterated += numResultsLastPage;
+    } while (numResultsLastPage > 0);
+  }
 
   public async listUserGroups(params?: QueryParams): Promise<JumpCloudGroup[]> {
     return this.makeRequest<JumpCloudGroup[]>(
@@ -269,7 +313,26 @@ export class JumpCloudClient {
       params,
     );
   }
+  public async listAppleMDM(
+    params?: QueryParams,
+  ): Promise<JumpCloudAppleMDM[]> {
+    return this.makeRequest<JumpCloudAppleMDM[]>(
+      `${this.BASE_API_URL}/v2/applemdms`,
+      [],
+      params,
+    );
+  }
 
+  public async listAppleDevice(
+    mdmId: string,
+    params?: QueryParams,
+  ): Promise<JumpCloudAppleDevice[]> {
+    return this.makeRequest<JumpCloudAppleDevice[]>(
+      `${this.BASE_API_URL}/v2/applemdms/${mdmId}/devices`,
+      [],
+      params,
+    );
+  }
   private async makeRequest<T>(
     resourceUrl: string,
     emptyResponse: T,
@@ -291,6 +354,7 @@ export class JumpCloudClient {
             headers: {
               ...this.credentials,
               contentType: 'application/json',
+              accept: 'application/json',
             },
           });
         } catch (err) {
@@ -325,8 +389,7 @@ export class JumpCloudClient {
         maxAttempts: 15,
         handleError(err: Error, context: AttemptContext) {
           const { status: statusCode } = err as IntegrationProviderAPIError;
-
-          if (statusCode !== 429 && statusCode !== 500) {
+          if (statusCode === 403) {
             context.abort();
           }
         },
