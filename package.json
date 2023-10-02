@@ -6,6 +6,9 @@
   "license": "MPL-2.0",
   "main": "src/index.js",
   "types": "src/index.d.ts",
+  "engines": {
+    "node": ">=18.0.0 <19.x"
+  },
   "files": [
     "src",
     "jupiterone"
@@ -32,16 +35,33 @@
     "prepush": "yarn format:check && yarn lint && yarn type-check && jest --changedSince main"
   },
   "peerDependencies": {
-    "@jupiterone/integration-sdk-core": "^8.30.1"
+    "@jupiterone/integration-sdk-core": "^11.0.0"
   },
   "devDependencies": {
-    "@jupiterone/integration-sdk-core": "^8.30.1",
-    "@jupiterone/integration-sdk-dev-tools": "^8.30.1",
-    "@jupiterone/integration-sdk-testing": "^8.30.1",
-    "@types/node-fetch": "^2.5.8"
+    "@jupiterone/integration-sdk-core": "^11.0.0",
+    "@jupiterone/integration-sdk-dev-tools": "^11.0.0",
+    "@jupiterone/integration-sdk-testing": "^11.0.0",
+    "@types/node-fetch": "^2.5.8",
+    "auto": "^11.0.4"
   },
   "dependencies": {
     "@lifeomic/attempt": "^3.0.3",
     "node-fetch": "^2.6.7"
+  },
+  "auto": {
+    "plugins": [
+      [
+        "npm",
+        {
+          "setRcToken": false,
+          "publishFolder": "./dist"
+        }
+      ],
+      "released"
+    ],
+    "onlyPublishWithReleaseLabel": true,
+    "shipit": {
+      "prerelease": false
+    }
   }
 }

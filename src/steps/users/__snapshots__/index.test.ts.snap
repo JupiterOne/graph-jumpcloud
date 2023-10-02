@@ -1,18 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`#fetchUsers should collect data 1`] = `
-Object {
-  "collectedEntities": Array [
-    Object {
-      "_class": Array [
+{
+  "collectedEntities": [
+    {
+      "_class": [
         "Account",
         "Organization",
       ],
       "_key": "60259a2ad81e1a474d4e7c83",
-      "_rawData": Array [
-        Object {
+      "_rawData": [
+        {
           "name": "default",
-          "rawData": Object {
+          "rawData": {
             "_id": "60259a2ad81e1a474d4e7c83",
             "created": "2021-02-11T20:57:14.837Z",
             "displayName": null,
@@ -29,22 +29,22 @@ Object {
       "name": "60259a2ad81e1a474d4e7c83",
       "webLink": "https://console.jumpcloud.com",
     },
-    Object {
-      "_class": Array [
+    {
+      "_class": [
         "User",
       ],
       "_key": "6026bec6b8207255280d5981",
-      "_rawData": Array [
-        Object {
+      "_rawData": [
+        {
           "name": "default",
-          "rawData": Object {
+          "rawData": {
             "_id": "6026bec6b8207255280d5981",
             "account_locked": false,
             "account_locked_date": null,
             "activated": false,
-            "addresses": Array [],
+            "addresses": [],
             "allow_public_key": true,
-            "attributes": Array [],
+            "attributes": [],
             "company": "",
             "costCenter": "",
             "created": "2021-02-12T17:45:42.369Z",
@@ -66,7 +66,7 @@ Object {
             "lastname": "Kelleher",
             "ldap_binding_user": false,
             "location": "",
-            "mfa": Object {
+            "mfa": {
               "configured": false,
               "exclusion": false,
             },
@@ -74,13 +74,13 @@ Object {
             "password_expired": false,
             "password_never_expires": false,
             "passwordless_sudo": false,
-            "phoneNumbers": Array [],
+            "phoneNumbers": [],
             "samba_service_user": false,
-            "ssh_keys": Array [],
+            "ssh_keys": [],
             "sudo": false,
             "suspended": false,
             "systemUsername": "",
-            "tags": Array [],
+            "tags": [],
             "totp_enabled": false,
             "unix_guid": 5001,
             "unix_uid": 5001,
@@ -118,8 +118,8 @@ Object {
       "webLink": "https://console.jumpcloud.com/#/users/6026bec6b8207255280d5981/details",
     },
   ],
-  "collectedRelationships": Array [
-    Object {
+  "collectedRelationships": [
+    {
       "_class": "HAS",
       "_fromEntityKey": "60259a2ad81e1a474d4e7c83",
       "_key": "60259a2ad81e1a474d4e7c83|has|6026bec6b8207255280d5981",
@@ -128,7 +128,7 @@ Object {
       "displayName": "HAS",
     },
   ],
-  "encounteredTypes": Array [
+  "encounteredTypes": [
     "jumpcloud_account",
     "jumpcloud_user",
     "jumpcloud_account_has_user",
