@@ -83,7 +83,7 @@ export async function fetchGroupMembers({
           to: userEntity,
         });
 
-        const relationshipExists = await jobState.hasKey(
+        const relationshipExists = jobState.hasKey(
           groupMemberRelationship._key,
         );
         if (!relationshipExists) {
