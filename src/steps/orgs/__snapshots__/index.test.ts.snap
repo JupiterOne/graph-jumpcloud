@@ -1,18 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`#fetchOrgs should collect data 1`] = `
-Object {
-  "collectedEntities": Array [
-    Object {
-      "_class": Array [
+{
+  "collectedEntities": [
+    {
+      "_class": [
         "Account",
         "Organization",
       ],
       "_key": "60259a2ad81e1a474d4e7c83",
-      "_rawData": Array [
-        Object {
+      "_rawData": [
+        {
           "name": "default",
-          "rawData": Object {
+          "rawData": {
             "_id": "60259a2ad81e1a474d4e7c83",
             "created": "2021-02-11T20:57:14.837Z",
             "displayName": null,
@@ -30,8 +30,8 @@ Object {
       "webLink": "https://console.jumpcloud.com",
     },
   ],
-  "collectedRelationships": Array [],
-  "encounteredTypes": Array [
+  "collectedRelationships": [],
+  "encounteredTypes": [
     "jumpcloud_account",
   ],
   "numCollectedEntities": 1,
