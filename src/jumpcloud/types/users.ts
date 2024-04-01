@@ -10,6 +10,7 @@ export interface JumpCloudUser extends JumpCloudObject {
   unix_uid?: number | null;
   unix_guid?: number | null;
   activated?: boolean | null;
+  state: 'STAGED' | 'ACTIVATED' | 'SUSPENDED';
   suspended?: boolean | null;
   tags?: string[] | null;
   password_expired?: boolean | null;

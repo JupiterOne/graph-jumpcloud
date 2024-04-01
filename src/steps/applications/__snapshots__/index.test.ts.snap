@@ -113,6 +113,7 @@ exports[`#fetchAppBoundUsersAndGroups should collect data 1`] = `
       "mfaExclusionUntil": undefined,
       "name": "Austin Kelleher",
       "sambaServiceUser": false,
+      "state": "activated",
       "sudo": false,
       "suspended": false,
       "username": "austinkellehertest",

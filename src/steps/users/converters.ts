@@ -24,7 +24,11 @@ export function createUserEntity(data: JumpCloudUser) {
         displayName: data.username as string,
         name: `${data.firstname} ${data.lastname}`,
         username: data.username,
-        active: !!data.activated,
+        state: data.state?.toLowerCase(),
+        active:
+          data.state === 'ACTIVATED' || !data.suspended
+            ? !!data.activated
+            : false,
         suspended: !!data.suspended,
         createdOn: parseTimePropertyValue(data.created)!,
         firstName: data.firstname,
