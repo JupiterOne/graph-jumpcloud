@@ -1,3 +1,23 @@
+# v2.3.1 (Mon Apr 01 2024)
+
+#### 🐛 Bug Fix
+
+- properly map active field on users [#51](https://github.com/JupiterOne/graph-jumpcloud/pull/51) ([@RonaldEAM](https://github.com/RonaldEAM))
+
+#### ⚠️ Pushed to `main`
+
+- Apply remove-codeql with multi-gitter [ci skip] ([@electricgull](https://github.com/electricgull))
+- Fix x-cortex-service-groups where tier-4 was set incorrectly ([@jablonnc](https://github.com/jablonnc))
+- Populate CODEOWENRS, baseline package.json and baseline cortex.yaml ([@jablonnc](https://github.com/jablonnc))
+
+#### Authors: 3
+
+- Cameron Griffin ([@electricgull](https://github.com/electricgull))
+- Noah Jablonski ([@jablonnc](https://github.com/jablonnc))
+- Ronald Arias ([@RonaldEAM](https://github.com/RonaldEAM))
+
+---
+
 # v2.3.0 (Mon Oct 02 2023)
 
 #### 🚀 Enhancement
