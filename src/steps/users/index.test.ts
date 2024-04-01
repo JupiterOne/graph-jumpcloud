@@ -41,6 +41,7 @@ describe('#fetchUsers', () => {
               items: { type: 'object' },
             },
             active: { type: 'boolean' },
+            state: { type: 'string' },
             suspended: { type: 'boolean' },
             firstName: { type: 'string' },
             lastName: { type: 'string' },

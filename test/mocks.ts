@@ -10,6 +10,7 @@ export function createMockUser(): JumpCloudUser {
     account_locked: false,
     account_locked_date: null,
     activated: false,
+    state: 'ACTIVATED',
     addresses: [],
     allow_public_key: true,
     attributes: [],
